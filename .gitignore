@@ -1,8 +1,5 @@
-# ignore all files without extension, except for Makefile
-*
-!/**/
-!*.*
-!*Makefile
+# ignore compiled binaries
+/**/main
 
 # visual studio code files
 .vscode/*
