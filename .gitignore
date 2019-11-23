@@ -1,0 +1,11 @@
+# ignore all files without extension, except for Makefile
+*
+!/**/
+!*.*
+!*Makefile
+
+# visual studio code files
+.vscode/*
+
+# test codes
+test/
