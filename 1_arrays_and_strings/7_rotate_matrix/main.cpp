@@ -14,16 +14,16 @@
 using namespace std;
 
 // receives a square matrix. rotates in place
-void rotateMatrix(vector<vector<int> > &mat) {
-  int N = mat.size();
+void rotateMatrix(vector<vector<int> > &t_mat) {
+  int N = t_mat.size();
   for (int i = 0; i < N / 2; i++) {
     // int first = layer, last = N - 1 - layer;
     for (int j = i; j < N - 1 - i; j++) {
-      int top = mat[i][j];                            // storing top temporarily
-      mat[i][j] = mat[j][N - 1 - i];                  // top <- right
-      mat[j][N - 1 - i] = mat[N - 1 - i][N - 1 - j];  // right <- bottom
-      mat[N - 1 - i][N - 1 - j] = mat[N - 1 - j][i];  // bottom <- left
-      mat[N - 1 - j][i] = top;                        // left <- top
+      int top = t_mat[i][j];              // storing top temporarily
+      t_mat[i][j] = t_mat[j][N - 1 - i];  // top <- right
+      t_mat[j][N - 1 - i] = t_mat[N - 1 - i][N - 1 - j];  // right <- bottom
+      t_mat[N - 1 - i][N - 1 - j] = t_mat[N - 1 - j][i];  // bottom <- left
+      t_mat[N - 1 - j][i] = top;                          // left <- top
     }
   }
 }
