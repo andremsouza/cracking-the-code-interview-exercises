@@ -116,12 +116,14 @@ bool SingleLinkedList<T>::remove(T t_data) {
     if (cur->getData() == t_data) {
       m_head = next;
       delete cur;
+      m_size--;
       return true;
     }
     while (next != nullptr) {
       if (next->getData() == t_data) {
         cur->setNext(next->getNext());
         delete next;
+        m_size--;
         return true;
       }
       cur = next;
