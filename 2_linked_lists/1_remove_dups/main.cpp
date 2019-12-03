@@ -8,43 +8,70 @@
 // * Solution 2 time complexity: O(n^2)
 // * Solution 2 space complexity: O(1)
 
-// ! NOTE: Solution in "linked_list.hpp"
-
+#include <forward_list>
 #include <iostream>
-#include "linked_list.hpp"
+#include <unordered_map>
 
 using namespace std;
 
+template <typename T>
+void removeListDupsHash(forward_list<T> &t_list) {
+  // using a hash map to store duplicates
+  unordered_map<T, bool> duplicate_map;
+  auto it = t_list.begin();
+
+  // iterating through list, checking duplicates in hash map
+  duplicate_map[*(t_list.begin())] = true;
+  while (next(it) != t_list.end()) {
+    if (duplicate_map.find(*(next(it))) != duplicate_map.end()) {
+      t_list.erase_after(it);
+    } else {
+      duplicate_map[*(next(it))] = true;
+      it = next(it);
+    }
+  }
+}
+
+template <typename T>
+void removeListDupsPointers(forward_list<T> &t_list) {
+  // using only pointers to remove duplicates
+  auto cur = t_list.begin();
+
+  while (cur != t_list.end()) {
+    auto cmp = cur;
+    while (next(cmp) != t_list.end()) {
+      if (*next(cmp) == *cur) {
+        t_list.erase_after(cmp);
+      } else {
+        cmp = next(cmp);
+      }
+    }
+    cur = next(cur);
+  }
+}
+
 // int main(int argc, char **argv) { // not using argc/argv
 int main(void) {
-  ll::SingleLinkedList<int> list_1, list_2;
-  ll::SingleLinkedNode<int> *node;
-  int i;
+  forward_list<int> list;
+  auto it = list.before_begin();
+  int val;
 
-  // receive input from stdin
-  while (cin >> i) {
-    list_1.push_back(i);
-    list_2.push_back(i);
+  // receiving list from stdin
+  // inserting sequentially in list
+  while (cin >> val) {
+    it = list.insert_after(it, val);
   }
 
-  // removing duplicates
-  list_1.removeDupsHash();
-  list_2.removeDupsPointers();
-  // writing output to stdout
-  cout << "List 1 (removal with hash mapping): ";
-  node = list_1.getHead();
-  while (node != nullptr) {
-    cout << node->getData() << " ";
-    node = node->getNext();
+  if (list.empty()) {
+    cout << "List is empty. Aborting..." << endl;
+    return 0;
   }
-  cout << endl;
 
-  // writing output to stdout
-  cout << "List 2 (removal with pointers only): ";
-  node = list_2.getHead();
-  while (node != nullptr) {
-    cout << node->getData() << " ";
-    node = node->getNext();
+  removeListDupsHash(list);
+  // removeListDupsPointers(list);
+
+  for (auto i = list.begin(); i != list.end(); i++) {
+    cout << *i << " ";
   }
   cout << endl;
 
