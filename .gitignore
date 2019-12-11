@@ -6,3 +6,6 @@
 
 # test codes
 test/
+
+# CLion files
+.idea/*
