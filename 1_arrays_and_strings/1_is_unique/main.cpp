@@ -9,8 +9,8 @@
 using namespace std;
 
 // int main(int argc, char const *argv[]) { // not using argc/argv
-int main(void) {
-  bool charset[ASCII_SIZE] = {0};  // bit vector initialized with zeros
+int main() {
+  bool charset[ASCII_SIZE] = {false};  // bit vector initialized with zeros
   bool is_all_unique = true;
   char c;
 
@@ -18,7 +18,6 @@ int main(void) {
   while (scanf("%c", &c) != EOF) {
     if (charset[(int)c]) {
       is_all_unique = false;
-      break;
     }
     charset[(int)c] = true;
   }
