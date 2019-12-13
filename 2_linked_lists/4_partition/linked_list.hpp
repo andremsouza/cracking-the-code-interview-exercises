@@ -8,7 +8,7 @@ namespace ll {
 
 // ! --------------------------------------------------------------------------
 
-template <typename T>
+template<typename T>
 class SingleLinkedNode {
  private:
   T m_data;
@@ -31,32 +31,32 @@ class SingleLinkedNode {
 template<typename T>
 SingleLinkedNode<T>::SingleLinkedNode() = default;
 
-template <typename T>
+template<typename T>
 SingleLinkedNode<T>::SingleLinkedNode(T t_data) : m_data(t_data) {}
 
-template <typename T>
+template<typename T>
 T SingleLinkedNode<T>::getData() {
   return m_data;
 }
 
-template <typename T>
+template<typename T>
 void SingleLinkedNode<T>::setData(T t_data) {
   m_data = t_data;
 }
 
-template <typename T>
+template<typename T>
 SingleLinkedNode<T> *SingleLinkedNode<T>::getNext() {
   return m_next;
 }
 
-template <typename T>
+template<typename T>
 void SingleLinkedNode<T>::setNext(SingleLinkedNode<T> *t_next) {
   m_next = t_next;
 }
 
 // ! --------------------------------------------------------------------------
 
-template <typename T>
+template<typename T>
 class SingleLinkedList {
  private:
   SingleLinkedNode<T> *m_head = nullptr;
@@ -88,7 +88,7 @@ class SingleLinkedList {
 template<typename T>
 SingleLinkedList<T>::SingleLinkedList() = default;
 
-template <typename T>
+template<typename T>
 SingleLinkedList<T>::~SingleLinkedList() {
   if (m_size) {
     SingleLinkedNode<T> *cur = m_head;
@@ -103,12 +103,12 @@ SingleLinkedList<T>::~SingleLinkedList() {
   }
 }
 
-template <typename T>
+template<typename T>
 SingleLinkedNode<T> *SingleLinkedList<T>::getHead() {
   return m_head;
 }
 
-template <typename T>
+template<typename T>
 SingleLinkedNode<T> *SingleLinkedList<T>::push_back(T t_data) {
   auto *new_node = new SingleLinkedNode<T>(t_data);
   // if list is empty, set head as new node
@@ -126,7 +126,7 @@ SingleLinkedNode<T> *SingleLinkedList<T>::push_back(T t_data) {
   return new_node;
 }
 
-template <typename T>
+template<typename T>
 SingleLinkedNode<T> *SingleLinkedList<T>::push_front(T t_data) {
   auto *new_node = new SingleLinkedNode<T>(t_data);
   // if list is empty, set head as new node
@@ -141,7 +141,7 @@ SingleLinkedNode<T> *SingleLinkedList<T>::push_front(T t_data) {
   return new_node;
 }
 
-template <typename T>
+template<typename T>
 bool SingleLinkedList<T>::remove(T t_data) {
   if (m_size) {
     SingleLinkedNode<T> *cur = m_head;
@@ -166,7 +166,7 @@ bool SingleLinkedList<T>::remove(T t_data) {
   return false;
 }
 
-template <typename T>
+template<typename T>
 void SingleLinkedList<T>::removeDupsHash() {
   // using an unordered_map (hash table) to store duplicates for values
   std::unordered_map<T, bool> elementHash;
@@ -186,7 +186,7 @@ void SingleLinkedList<T>::removeDupsHash() {
   }
 }
 
-template <typename T>
+template<typename T>
 void SingleLinkedList<T>::removeDupsPointers() {
   SingleLinkedNode<T> *cur = m_head, *cmp;
 
@@ -206,7 +206,7 @@ void SingleLinkedList<T>::removeDupsPointers() {
   }
 }
 
-template <typename T>
+template<typename T>
 SingleLinkedNode<T> *SingleLinkedList<T>::getKthToLast(const int t_k) {
   // initialize pointers to nodes in the list
   SingleLinkedNode<T> *cur = m_head, *cmp = m_head;
@@ -230,7 +230,7 @@ SingleLinkedNode<T> *SingleLinkedList<T>::getKthToLast(const int t_k) {
   return cur;
 }
 
-template <typename T>
+template<typename T>
 void SingleLinkedList<T>::removeNodeFromMiddle(SingleLinkedNode<T> *t_node) {
   // assuming I don't have access to the list's head
   if (t_node != nullptr) {
@@ -245,14 +245,14 @@ void SingleLinkedList<T>::removeNodeFromMiddle(SingleLinkedNode<T> *t_node) {
   }
 }
 
-template <typename T>
+template<typename T>
 void SingleLinkedList<T>::partitionByValue(const T t_value) {
   // EXAMPLE
   // Input: 3 -> 5 -> 8 -> 5 -> 10 -> 2 -> 1 [partition=5]
   // Output 3-> 1 -> 2 -> 10 -> 5 -> 5 -> 8
   // trying to do this operation in place
   SingleLinkedNode<T> *cur = m_head, *left_s = nullptr, *left_e = nullptr,
-                      *right_s = nullptr, *right_e = nullptr;
+      *right_s = nullptr, *right_e = nullptr;
 
   // iterate over original list
   while (cur != nullptr) {
