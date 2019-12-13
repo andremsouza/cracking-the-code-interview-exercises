@@ -5,13 +5,14 @@
 
 #include <forward_list>
 #include <iostream>
+#include <sstream>
 #include <stack>
 
 typedef unsigned char uchar;
 
 using namespace std;
 
-template <typename T>
+template<typename T>
 bool isPalindrome(forward_list<T> t_list) {
   // using an iterative approach with a stack
   stack<T> st;
@@ -42,14 +43,17 @@ bool isPalindrome(forward_list<T> t_list) {
 }
 
 // int main(int argc, char **argv) { // not using argc/argv
-int main(void) {
+int main() {
   forward_list<int> list;
   auto it = list.before_begin();
-  int val;
 
   // receiving list from stdin
   // inserting sequentially in list
-  while (cin >> val) {
+  string str;
+  getline(cin, str);
+  istringstream s_stream(str);
+  int val;
+  while (s_stream >> val) {
     it = list.insert_after(it, val);
   }
 
