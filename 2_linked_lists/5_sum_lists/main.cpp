@@ -25,8 +25,8 @@ typedef unsigned char uchar;
 
 using namespace std;
 
-forward_list<uchar> sumListReverse(const forward_list<uchar> t_a,
-                                   const forward_list<uchar> t_b) {
+forward_list<uchar> sumListReverse(const forward_list<uchar> &t_a,
+                                   const forward_list<uchar> &t_b) {
   forward_list<uchar> sum;
   auto it_sum = sum.before_begin();
   auto it_a = t_a.begin(), it_b = t_b.begin();
@@ -38,10 +38,10 @@ forward_list<uchar> sumListReverse(const forward_list<uchar> t_a,
 
   // iterating and calculating sum of each position, with carryover
   while (it_a != t_a.end() || it_b != t_a.end()) {
-    d_sum = (it_a == t_a.end() ? 0 : *it_a - '0') +
-            (it_b == t_b.end() ? 0 : *it_b - '0') + carry;
-    carry = d_sum / 10;
-    d_sum = d_sum % 10;
+    d_sum = static_cast<uchar>((it_a == t_a.end() ? 0 : *it_a - '0') +
+        (it_b == t_b.end() ? 0 : *it_b - '0') + carry);
+    carry = static_cast<uchar>(d_sum / 10);
+    d_sum = static_cast<uchar>(d_sum % 10);
     it_sum = sum.insert_after(it_sum, d_sum + '0');
     if (it_a != t_a.end()) it_a = next(it_a);
     if (it_b != t_a.end()) it_b = next(it_b);
@@ -49,7 +49,7 @@ forward_list<uchar> sumListReverse(const forward_list<uchar> t_a,
 
   // last carryover
   if (carry) {
-    it_sum = sum.insert_after(it_sum, carry + '0');
+    sum.insert_after(it_sum, carry + '0');
   }
 
   return sum;
@@ -77,7 +77,7 @@ void sumListRec(forward_list<uchar>& t_sum, const forward_list<uchar>& t_a,
   *t_carry = d_sum / 10;
   d_sum = d_sum % 10;
   // push to the front of the sum list
-  t_sum.push_front(d_sum + '0');
+  t_sum.push_front(static_cast<uchar &&>(d_sum + '0'));
 }
 
 forward_list<uchar> sumList(forward_list<uchar> t_a, forward_list<uchar> t_b) {
@@ -112,13 +112,13 @@ forward_list<uchar> sumList(forward_list<uchar> t_a, forward_list<uchar> t_b) {
 
   // calling recursive function
   sumListRec(sum, t_a, t_b, t_a.begin(), t_b.begin(), &carry);
-  if (carry) sum.push_front(carry + '0');
+  if (carry) sum.push_front(static_cast<uchar &&>(carry + '0'));
 
   return sum;
 }
 
 // int main(int argc, char **argv) { // not using argc/argv
-int main(void) {
+int main() {
   forward_list<uchar> a, b, sum, sum_rev;
   auto it = a.before_begin();
   string str;
@@ -126,12 +126,12 @@ int main(void) {
   // receiving lists from standard input
 
   getline(cin, str);
-  for (const auto& c : str) {
+  for (const auto &c : str) {
     if (c < '0' || c > '9') {
       cout << "Invalid input character: " << c << endl;
       exit(1);
     }
-    it = a.insert_after(it, c);
+    it = a.insert_after(it, (uchar &&) c);
   }
 
   it = b.before_begin();
@@ -141,7 +141,7 @@ int main(void) {
       cout << "Invalid input character: " << c << endl;
       exit(1);
     }
-    it = b.insert_after(it, c);
+    it = b.insert_after(it, (uchar &&) c);
   }
 
   // calculating sum of lists a and b

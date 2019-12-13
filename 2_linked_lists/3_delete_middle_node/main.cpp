@@ -16,10 +16,10 @@
 using namespace std;
 
 // int main(int argc, char **argv) { // not using argc/argv
-int main(void) {
+int main() {
   ll::SingleLinkedList<int> list;
   ll::SingleLinkedNode<int> *node = nullptr;
-  int i, k;
+  int i = 0, k = 0;
 
   // receive input from stdin
   cin >> k;

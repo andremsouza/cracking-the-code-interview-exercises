@@ -35,11 +35,11 @@ typename forward_list<T>::iterator getKthToLast(forward_list<T> &t_list,
 }
 
 // int main(int argc, char **argv) { // not using argc/argv
-int main(void) {
+int main() {
   forward_list<int> list;
   auto it = list.before_begin();
-  unsigned int k;
-  int val;
+  unsigned int k = 0;
+  int val = 0;
 
   // receiving k from stdin
   cin >> k;

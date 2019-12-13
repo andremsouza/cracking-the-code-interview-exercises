@@ -52,7 +52,7 @@ int main() {
   string str;
   getline(cin, str);
   istringstream s_stream(str);
-  int val;
+  int val = 0;
   while (s_stream >> val) {
     it = list.insert_after(it, val);
   }

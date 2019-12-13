@@ -18,7 +18,7 @@ class SingleLinkedNode {
   // constructor
 
   SingleLinkedNode();
-  SingleLinkedNode(T t_data);
+  explicit SingleLinkedNode(T t_data);
 
   // public methods
 
@@ -28,8 +28,8 @@ class SingleLinkedNode {
   void setNext(SingleLinkedNode<T> *t_next);
 };
 
-template <typename T>
-SingleLinkedNode<T>::SingleLinkedNode() {}
+template<typename T>
+SingleLinkedNode<T>::SingleLinkedNode() = default;
 
 template <typename T>
 SingleLinkedNode<T>::SingleLinkedNode(T t_data) : m_data(t_data) {}
@@ -76,17 +76,17 @@ class SingleLinkedList {
   void removeDupsPointers();
 
   // * 2.2 implementations
-  SingleLinkedNode<T> *getKthToLast(const int t_k);
+  SingleLinkedNode<T> *getKthToLast(int t_k);
 
   // * 2.3 implementations
   void removeNodeFromMiddle(SingleLinkedNode<T> *t_node);
 
   // * 2.4 implementations
-  void partitionByValue(const T t_value);
+  void partitionByValue(T t_value);
 };
 
-template <typename T>
-SingleLinkedList<T>::SingleLinkedList() {}
+template<typename T>
+SingleLinkedList<T>::SingleLinkedList() = default;
 
 template <typename T>
 SingleLinkedList<T>::~SingleLinkedList() {
@@ -110,7 +110,7 @@ SingleLinkedNode<T> *SingleLinkedList<T>::getHead() {
 
 template <typename T>
 SingleLinkedNode<T> *SingleLinkedList<T>::push_back(T t_data) {
-  SingleLinkedNode<T> *new_node = new SingleLinkedNode<T>(t_data);
+  auto *new_node = new SingleLinkedNode<T>(t_data);
   // if list is empty, set head as new node
   if (m_size == 0) {
     m_head = new_node;
@@ -128,7 +128,7 @@ SingleLinkedNode<T> *SingleLinkedList<T>::push_back(T t_data) {
 
 template <typename T>
 SingleLinkedNode<T> *SingleLinkedList<T>::push_front(T t_data) {
-  SingleLinkedNode<T> *new_node = new SingleLinkedNode<T>(t_data);
+  auto *new_node = new SingleLinkedNode<T>(t_data);
   // if list is empty, set head as new node
   if (m_size == 0) {
     m_head = new_node;
@@ -273,7 +273,7 @@ void SingleLinkedList<T>::partitionByValue(const T t_value) {
         right_s = cur;
         right_e = right_s;
       } else if (cur->getData() == t_value) {
-        // if value equal to t_value, insert at the beggining
+        // if value equal to t_value, insert at the beginning
         cur->setNext(right_s);
         right_s = cur;
       } else {

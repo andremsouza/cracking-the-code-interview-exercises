@@ -51,10 +51,10 @@ void removeListDupsPointers(forward_list<T> &t_list) {
 }
 
 // int main(int argc, char **argv) { // not using argc/argv
-int main(void) {
+int main() {
   forward_list<int> list;
   auto it = list.before_begin();
-  int val;
+  int val = 0;
 
   // receiving list from stdin
   // inserting sequentially in list
@@ -70,8 +70,8 @@ int main(void) {
   removeListDupsHash(list);
   // removeListDupsPointers(list);
 
-  for (auto i = list.begin(); i != list.end(); i++) {
-    cout << *i << " ";
+  for (const auto &i : list) {
+    cout << i << " ";
   }
   cout << endl;
 
