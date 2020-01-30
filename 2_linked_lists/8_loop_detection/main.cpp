@@ -1,11 +1,15 @@
 // Given a circular linked list, implement an algorithm that returns the node at
 // the beginning of the loop
 
-#include "linked_list.hpp"
+// * Solution time complexity: O(n)
+// * Solution space complexity: O(n)
+
 #include <iostream>
+#include <random>
 #include <sstream>
 #include <unordered_map>
-#include <random>
+
+#include "linked_list.hpp"
 
 constexpr double LOOP_PROBABILITY = 0.8;
 
@@ -13,7 +17,7 @@ typedef unsigned char uchar;
 
 using namespace std;
 
-template<typename T>
+template <typename T>
 ll::SingleLinkedNode<T> *findLoop(ll::SingleLinkedList<T> &t_list) {
   auto cur = t_list.getHead();
   unordered_map<ll::SingleLinkedNode<T> *, bool> node_map;
@@ -32,7 +36,8 @@ ll::SingleLinkedNode<T> *findLoop(ll::SingleLinkedList<T> &t_list) {
 // int main(int argc, char **argv) { // not using argc/argv
 int main() {
   ll::SingleLinkedList<int> list;
-  ll::SingleLinkedNode<int> *loop_node = nullptr, *node = nullptr, *out_node = nullptr;
+  ll::SingleLinkedNode<int> *loop_node = nullptr, *node = nullptr,
+                            *out_node = nullptr;
   int val = 0, count = 0;
 
   // initialize random with seed
