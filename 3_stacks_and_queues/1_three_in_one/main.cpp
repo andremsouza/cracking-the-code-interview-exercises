@@ -31,9 +31,9 @@ class ArrayMultiStack {
 
   bool empty(unsigned int t_stack_id);
   unsigned int size(unsigned int t_stack_id);
-  T& top(unsigned int t_stack_id);
+  T* top(unsigned int t_stack_id);
   void push(T t_data, unsigned int t_stack_id);
-  T& pop(unsigned int t_stack_id);
+  T* pop(unsigned int t_stack_id);
 };
 
 template <typename T>
@@ -89,12 +89,12 @@ unsigned int ArrayMultiStack<T>::size(unsigned int t_stack_id) {
 }
 
 template <typename T>
-T& ArrayMultiStack<T>::top(unsigned int t_stack_id) {
+T* ArrayMultiStack<T>::top(unsigned int t_stack_id) {
   checkValidStackId(t_stack_id);
   if (m_sizes[t_stack_id] == 0) {
     throw logic_error("Atempt to access element of an empty stack.");
   }
-  return m_arr[m_top[t_stack_id]];
+  return &(m_arr[m_top[t_stack_id]]);
 }
 
 template <typename T>
@@ -116,7 +116,7 @@ void ArrayMultiStack<T>::push(T t_data, unsigned int t_stack_id) {
 }
 
 template <typename T>
-T& ArrayMultiStack<T>::pop(unsigned int t_stack_id) {
+T* ArrayMultiStack<T>::pop(unsigned int t_stack_id) {
   checkValidStackId(t_stack_id);
   if (m_sizes[t_stack_id] == 0) {
     throw logic_error("Atempt to access element of an empty stack.");
@@ -133,7 +133,7 @@ T& ArrayMultiStack<T>::pop(unsigned int t_stack_id) {
   m_free = i;
 
   // return removed element
-  return m_arr[i];
+  return &(m_arr[i]);
 }
 
 // int main(int argc, char const *argv[]) { // Not using argc/argv
