@@ -6,7 +6,8 @@
 template <typename T>
 class Stack {
  private:
-  unsigned int m_top = -1, m_capacity;
+  unsigned int m_capacity;
+  int m_top = -1;
   T* m_arr;
 
  public:
@@ -38,7 +39,7 @@ bool Stack<T>::empty() {
 
 template <typename T>
 bool Stack<T>::full() {
-  return m_top >= m_capacity - 1;
+  return m_top >= (int)m_capacity - 1;
 }
 
 template <typename T>
