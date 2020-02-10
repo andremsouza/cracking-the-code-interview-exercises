@@ -16,10 +16,10 @@ class ArrayMultiStack {
   T* m_arr;               // array of size m_n_capacity to store data
   unsigned int* m_sizes;  // number of elements in each stack
   unsigned int* m_top;    // index of top element of each stack
-  unsigned int* m_next;   // index of next item, for all elements of m_arr
+  int* m_next;            // index of next item, for all elements of m_arr
 
-  unsigned int m_n_stacks, m_n_capacity,
-      m_free = 0;  // stores starting index of free list
+  unsigned int m_n_stacks, m_n_capacity;
+  int m_free = 0;  // stores starting index of free list
 
   void checkValidStackId(const unsigned int t_stack_id);
   bool full();
@@ -43,7 +43,7 @@ ArrayMultiStack<T>::ArrayMultiStack(const unsigned int t_n_stacks,
   m_arr = new T[m_n_capacity]();
   m_sizes = new unsigned int[m_n_stacks]();
   m_top = new unsigned int[m_n_stacks];
-  m_next = new unsigned int[m_n_capacity];
+  m_next = new int[m_n_capacity];
 
   // initialize all stacks as empty (-1)
   fill(m_top, m_top + m_n_stacks, -1);
@@ -111,6 +111,9 @@ void ArrayMultiStack<T>::push(T t_data, unsigned int t_stack_id) {
   m_next[i] = m_top[t_stack_id];
   m_top[t_stack_id] = i;
 
+  // update stack size
+  m_sizes[t_stack_id]++;
+
   // insert data
   m_arr[i] = t_data;
 }
@@ -132,6 +135,9 @@ T* ArrayMultiStack<T>::pop(unsigned int t_stack_id) {
   m_next[i] = m_free;
   m_free = i;
 
+  // update stack size
+  m_sizes[t_stack_id]--;
+
   // return removed element
   return &(m_arr[i]);
 }
@@ -140,6 +146,14 @@ T* ArrayMultiStack<T>::pop(unsigned int t_stack_id) {
 int main() {
   /* code */
   ArrayMultiStack<int> arr(3, 30);
+  arr.push(0, 0);
+  arr.push(1, 1);
+  arr.push(2, 2);
+  cout << *arr.top(0) << *arr.top(1) << *arr.top(2) << endl;
+  arr.pop(0);
+  arr.pop(1);
+  arr.pop(2);
+  cout << arr.empty(0) << arr.empty(1) << arr.empty(2) << endl;
 
   return 0;
 }
