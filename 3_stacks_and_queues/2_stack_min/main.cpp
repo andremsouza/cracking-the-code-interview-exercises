@@ -65,9 +65,18 @@ int main() {
   /* code */
   StackMin<int> arr(100);
   arr.push(10);
+  arr.push(2);
   arr.push(5);
+  arr.push(2);
   arr.push(4);
+  arr.push(2);
   arr.push(20);
+  std::cout << *arr.top() << " " << *arr.min() << std::endl;
+  arr.pop();
+  std::cout << *arr.top() << " " << *arr.min() << std::endl;
+  arr.pop();
+  std::cout << *arr.top() << " " << *arr.min() << std::endl;
+  arr.pop();
   std::cout << *arr.top() << " " << *arr.min() << std::endl;
   arr.pop();
   std::cout << *arr.top() << " " << *arr.min() << std::endl;
