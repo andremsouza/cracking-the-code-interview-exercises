@@ -149,11 +149,14 @@ int main() {
   arr.push(0, 0);
   arr.push(1, 1);
   arr.push(2, 2);
+  arr.push(4, 0);
   cout << *arr.top(0) << *arr.top(1) << *arr.top(2) << endl;
   arr.pop(0);
   arr.pop(1);
   arr.pop(2);
   cout << arr.empty(0) << arr.empty(1) << arr.empty(2) << endl;
+  arr.pop(0);
+  cout << arr.size(0) << arr.size(1) << arr.size(2) << endl;
 
   return 0;
 }
