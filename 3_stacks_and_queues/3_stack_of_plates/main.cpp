@@ -16,6 +16,9 @@
 // * solution would be to rollover the elements
 // * from the subsequents stacks, filling up the empty spaces, but this is
 // * computationally expensive.
+// * Another solution would be to maintain a secondary priority queue of
+// * available sub-stacks. A push operation would insert an element into the
+// * first available slot in a sub-stack of the set.
 
 #include <deque>
 #include <iostream>
