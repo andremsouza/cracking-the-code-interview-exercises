@@ -65,7 +65,6 @@ std::unique_ptr<BinaryNode<T>> BinaryTree<T>::CreateMinTree(
   while (half-- > 0) {
     middle++;
   }
-  std::cout << *(middle) << std::endl;
   // create node with middle element
   auto node = std::make_unique<BinaryNode<T>>(*middle);
   // split container into left and right section
