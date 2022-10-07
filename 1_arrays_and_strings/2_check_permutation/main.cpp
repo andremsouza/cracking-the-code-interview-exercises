@@ -27,14 +27,19 @@ bool IsPermutation(const std::string &a, const std::string &b) {
   return true;
 }
 
-// int main(int argc, char **argv){ // not using argc / argv
-int main(void) {
+int main(int argc, char **argv) {
   std::string a, b;  // storing strings from input
 
-  std::getline(std::cin, a);
-  std::getline(std::cin, b);
+  // reading strings from input
+  if (argc > 2) {  // if two strings are passed as arguments
+    a = argv[1];
+    b = argv[2];
+  } else {  // if no arguments are passed, read from stdin
+    std::getline(std::cin, a);
+    std::getline(std::cin, b);
+  }
 
-  std::cout << "IsPermutation = " << IsPermutation(a, b) << std::endl;
+  std::cout << IsPermutation(a, b) << std::endl;
 
   return 0;
 }
