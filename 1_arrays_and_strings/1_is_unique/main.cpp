@@ -20,11 +20,11 @@ int main() {
 
   // read input from stdin and check bitvector
   while (std::cin >> c) {
-    if (charset[c] {
+    if (charset[c]) {
       is_all_unique = false;
       break;
     }
-    charset[c]= true;
+    charset[c] = true;
   }
 
   // Print output to stdout
