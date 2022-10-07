@@ -6,66 +6,55 @@
 // Input: Tact Coa
 // Output: True (permutations: "taco cat", "atco cta", etc.)
 
-// * Solution time complexity: O(n), n -> string size
-// * Solution space complexity: O(1), ignoring the string size
-
 #include <algorithm>
 #include <iostream>
+#include <memory>
 #include <string>
 
-#define ASCII_SIZE 256
+constexpr ushort kAsciiSize = 256;
 
-using namespace std;
+/**
+ * @brief Check if a string is a permutation of a palindrome.
+ *
+ * @details Defining palindrome properties:
+ *  1. The string is a palindrome if it has even number of each character.
+ *  2. If the string has an odd length, only one character count is odd
+ *  4. The string is a permutation of a palindrome if it satisfies the above
+ *  Solution complexity: O(n) time, O(1) space
+ *
+ * @param str String to check.
+ * @return true If the string is a permutation of a palindrome.
+ * @return false If the string is not a permutation of a palindrome.
+ */
+bool IsPalindromePermutation(const std::string& str) {
+  ushort count_vector[kAsciiSize] = {0};
+  for (const auto& c : str)
+    if (c != ' ') count_vector[c]++;
 
-// This function receives a string, and checks if it's a permutation of a
-// palindrome.
-// defining palindrome properties:
-// 1. the count of characters is always even, if the string has an even length
-// 2. if the string has an odd length, only one character count is odd
-bool isPalindromePermutation(string t_str) {
-  // removing spaces to count characters
-  // converting string to lowercase. ignoring character case
-  t_str.erase(std::remove(t_str.begin(), t_str.end(), ' '), t_str.end());
-  transform(t_str.begin(), t_str.end(), t_str.begin(),
-            [](unsigned char c) { return tolower(c); });
-
-  int count_vec[ASCII_SIZE] = {0};
-  int size = t_str.length();
-  bool is_pp = true, one_odd = false;
-
-  // counting each character from the string
-  for (int i = 0; i < size; i++) {
-    count_vec[(int)t_str[i]]++;
-  }
-
-  // verifying is the string is a palindrome permutation
-  for (int i = 0; i < ASCII_SIZE; i++) {
-    if (size % 2) {
-      if (count_vec[i] % 2) {
-        if (one_odd) {
-          is_pp = false;
-          break;
-        } else {
-          one_odd = true;
-        }
+  auto one_odd = false;
+  for (const auto& c : count_vector) {
+    if (c % 2 != 0) {  // Check if the character count is odd
+      if (one_odd) {   // If we already have one odd, return false
+        return false;
       }
-    } else if (count_vec[i] % 2) {
-      is_pp = false;
-      break;
+      one_odd = true;  // If we don't have one odd, set it to true
     }
   }
-
-  return is_pp;
+  return true;
 }
 
-// int main(int argc, char **argv) { // not using argc/argv
+// int main(int argc, char** argv) { // not using argc and argv for now
+/**
+ * @brief Check if a string is a permutation of a palindrome
+ *
+ * @return int 0 if successful
+ */
 int main(void) {
-  string str;
-
-  // receiving string from stdin
-  getline(cin, str);
-
-  cout << "isPalindromePermutation = " << isPalindromePermutation(str) << endl;
-
+  std::unique_ptr<std::string> str = std::make_unique<std::string>();
+  // read input string from stdin
+  std::getline(std::cin, *str);
+  // print result
+  std::cout << IsPalindromePermutation(*str) << std::endl;
+  // Note: str is automatically deleted when it goes out of scope
   return 0;
 }
