@@ -1,29 +1,34 @@
 // Implement an algorithm to determine if a string has all unique characters.
 // What if you cannot use additional data structures?
 
-#include <cstdio>
-#include <cstdlib>
+// Solution 1: using a bit vector
+// Solution complexity: O(n) time, O(1) space
 
-#define ASCII_SIZE 256
+#include <array>
+#include <iostream>
+#include <string>
 
-using namespace std;
+// #define ASCII_SIZE 256
+constexpr ushort kAsciiSize = 256;
 
 // int main(int argc, char const *argv[]) { // not using argc/argv
 int main() {
-  bool charset[ASCII_SIZE] = {false};  // bit vector initialized with zeros
-  bool is_all_unique = true;
-  char c;
+  std::array<bool, kAsciiSize> charset = {
+      false};                 // bit vector initialized with zeros
+  auto is_all_unique = true;  // output flag
+  unsigned char c;            // input character
 
-  // reading input from stdin and checking bitvector
-  while (scanf("%c", &c) != EOF) {
-    if (charset[(int)c]) {
+  // read input from stdin and check bitvector
+  while (std::cin >> c) {
+    if (charset[c] {
       is_all_unique = false;
+      break;
     }
-    charset[(int)c] = true;
+    charset[c]= true;
   }
 
-  // printing output to stdout
-  printf("Unique: %d\n", is_all_unique);
+  // Print output to stdout
+  std::cout << "Unique: " << is_all_unique << std::endl;
 
   return 0;
 }
