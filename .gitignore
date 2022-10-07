@@ -12,5 +12,8 @@ test/
 /cmake-build-debug/
 CMakeLists.txt
 
+# ignore all files in the build directory
+build/
+
 # Backup files
 *.bak
