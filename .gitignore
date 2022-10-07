@@ -11,3 +11,6 @@ test/
 .idea/*
 /cmake-build-debug/
 CMakeLists.txt
+
+# Backup files
+*.bak
