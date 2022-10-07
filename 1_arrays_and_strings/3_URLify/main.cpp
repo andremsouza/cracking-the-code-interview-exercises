@@ -41,21 +41,26 @@ void URLify(char *str, const int &size) {
   }
 }
 
-// int main(int argc, char **argv) { // not using argc/argv
 /**
  * @brief Main function
  *
  * @return int Code of execution
  */
-int main(void) {
+int main(int argc, char **argv) {
   std::string str;
   int size;
   // getting string and "real" size from stdin
-  // using string to read from stdin for convenience
-  std::getline(std::cin, str);
-  std::cin >> size;
+  if (argc > 2) {  // if arguments are passed
+    str = argv[1];
+    size = std::stoi(argv[2], nullptr, 10);
+  } else {  // if no arguments are passed, getting from stdin
+    std::cout << "Enter string: ";
+    std::getline(std::cin, str);
+    std::cout << "Enter size: ";
+    std::cin >> size;
+  }
   // creating char array from string
-  auto cstr = std::make_unique<char[]>(str.size() + 1);
+  auto cstr = std::make_unique<char[]>(str.size() * 3 + 1);
   std::strncpy(cstr.get(), str.c_str(), str.length() + 1);
   cstr[str.length()] = '\0';  // adding terminating character for safety
 
