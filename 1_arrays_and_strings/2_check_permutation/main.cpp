@@ -1,46 +1,40 @@
 // Given two strings, write a method to decide if one is a permutation of the
 // other.
 
+#include <array>
 #include <iostream>
 #include <string>
 
-#define ASCII_SIZE 256
+constexpr ushort kAsciiSize = 256;
 
-using namespace std;
-
-// receives two strings, and check if b is a permutation of a
-bool isPermutation(string t_a, string t_b) {
+// Receives two strings (a and b), and check if b is a permutation of a
+// Solution complexity (worst case): O(n) time, O(1) space
+// Best case: O(1) time, O(1) space
+bool IsPermutation(const std::string &a, const std::string &b) {
   // a permutation should have the same number of characters
-  if (t_a.length() != t_b.length()) {
-    return false;
-  }
-  // using counter vector for each possible character
-  int countvec[ASCII_SIZE] = {0};
+  if (a.length() != b.length()) return false;
+  // using counter vector for each possible character (ASCII)
+  std::array<int, kAsciiSize> count_vector = {0};
 
-  // counting number of characters of each string
-  for (int i = 0; i < (int)t_a.length(); i++) {
-    countvec[(int)t_a[i]]++;
-    countvec[(int)t_b[i]]--;
-  }
+  // counting number of characters of each string (a and b)
+  for (auto i = 0; i < (int)a.length(); i++)
+    count_vector[a[i]]++, count_vector[b[i]]--;
 
-  // checking if any index on the counter is "unbalanced"
-  for (int i = 0; i < ASCII_SIZE; i++) {
-    if (countvec[i]) {
-      return false;
-    }
-  }
+  // checking if any index on the counter is "unbalanced", i.e., != 0
+  for (const auto &count : count_vector)
+    if (count) return false;
 
   return true;
 }
 
 // int main(int argc, char **argv){ // not using argc / argv
 int main(void) {
-  string a, b;
+  std::string a, b;  // storing strings from input
 
-  getline(cin, a);
-  getline(cin, b);
+  std::getline(std::cin, a);
+  std::getline(std::cin, b);
 
-  cout << "Is_permutation = " << isPermutation(a, b) << endl;
-  // main
+  std::cout << "IsPermutation = " << IsPermutation(a, b) << std::endl;
+
   return 0;
 }
