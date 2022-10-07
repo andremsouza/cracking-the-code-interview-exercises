@@ -1,68 +1,70 @@
 // Write a method to replace all spaces in a string with '%20'. You may assume
 // that the string has sufficient space at the end to hold the additional
 // characters, and that you are given the "true" length of the string. (Note: If
-// implementing in Java, please use a characer array so that you can perform
+// implementing in Java, please use a character array so that you can perform
 // this operation in place.)
-
+//
+// Using cstring to simulate exercise limitations
 #include <cstdlib>
 #include <cstring>
 #include <iostream>
+#include <memory>  // for smart pointers
 #include <string>
 
-#define ASCII_SIZE 256
-
-using namespace std;
-
-// Gets an char *t_str, with at least t_size characters. Converts the original
-// character array to an URLified version, replacing spaces ' ' with  "%20".
-// ! NOTE: This operation is done in place of the original char *.
-// ! The original array should have enough space to store the additional chars.
-void URLify(char *t_str, int t_size) {
-  int count_spaces = 0, index;
+/**
+ * @brief Convert a string to a URL
+ * @details Spaces are replaced with '%20'. The function replaces the original
+ *  character array, so the size of the array must be at least the size of the
+ *  original string. Solution is O(n) time and O(1) space.
+ *
+ * @param str Pointer to the character array to be URLified
+ * @param size The size of the original string
+ */
+void URLify(char *str, const int &size) {
+  auto count_spaces = 0;
   // counting number of spaces to calculate new size of the array
-  for (int i = 0; i < t_size; i++) {
-    if (t_str[i] == ' ') {
-      count_spaces++;
-    }
-  }
-
+  for (auto i = 0; i < size; i++)
+    if (str[i] == ' ') count_spaces++;
   // calculating new size and inserting terminating character '\0'
-  index = t_size + count_spaces * 2;
-  t_str[index] = '\0';
+  auto index = size + count_spaces * 2;
+  str[index] = '\0';
 
-  // replacing spaces with "%20", from the end to the beggining
-  for (int i = t_size - 1; i >= 0; i--) {
-    if (t_str[i] == ' ') {
-      t_str[index-- - 1] = '0';
-      t_str[index-- - 1] = '2';
-      t_str[index-- - 1] = '%';
+  // replacing spaces with "%20", from the end to the beginning
+  for (auto i = size - 1; i >= 0; i--) {
+    if (str[i] == ' ') {
+      str[index-- - 1] = '0';
+      str[index-- - 1] = '2';
+      str[index-- - 1] = '%';
     } else {
-      t_str[index-- - 1] = t_str[i];
+      str[index-- - 1] = str[i];
     }
   }
 }
 
 // int main(int argc, char **argv) { // not using argc/argv
+/**
+ * @brief Main function
+ *
+ * @return int Code of execution
+ */
 int main(void) {
-  string str;
-  char *cstr;
+  std::string str;
   int size;
-
   // getting string and "real" size from stdin
   // using string to read from stdin for convenience
-  getline(cin, str);
-  cin >> size;
+  std::getline(std::cin, str);
+  std::cin >> size;
+  // creating char array from string
+  auto cstr = std::make_unique<char[]>(str.size() + 1);
+  std::strncpy(cstr.get(), str.c_str(), str.length() + 1);
+  cstr[str.length()] = '\0';  // adding terminating character for safety
 
-  // getting char array from string
-  cstr = new char[str.length() + 1];
-  strcpy(cstr, str.c_str());
+  // URLifying the string
+  URLify(cstr.get(), size);
 
-  // getting URLified string
-  URLify(cstr, size);
+  // printing URLified string
+  std::cout << cstr.get() << std::endl;
 
-  // printing output string
-  cout << string(cstr) << endl;
-
-  delete[] cstr;
-  return 0;
+  // NOTE: cstr will be automatically deleted when it goes out of scope
+  return EXIT_SUCCESS;
 }
