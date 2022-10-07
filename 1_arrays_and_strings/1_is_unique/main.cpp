@@ -28,7 +28,7 @@ int main() {
   }
 
   // Print output to stdout
-  std::cout << "Unique: " << is_all_unique << std::endl;
+  std::cout << is_all_unique << std::endl;
 
   return 0;
 }
