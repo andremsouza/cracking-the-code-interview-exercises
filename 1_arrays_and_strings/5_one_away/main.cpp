@@ -22,7 +22,7 @@
 bool IsReplaceChar(std::string str1, std::string str2) {
   auto isReplaceChar = false;
   if (str1.length() != str2.length()) return false;
-  for (int i = 0; i < str1.length(); i++) {
+  for (int i = 0; i < (int)str1.length(); i++) {
     if (str1[i] != str2[i]) {
       if (isReplaceChar) {
         return false;
@@ -44,7 +44,7 @@ bool IsReplaceChar(std::string str1, std::string str2) {
 bool IsInsertChar(std::string str1, std::string str2) {
   auto index1 = 0, index2 = 0;
   if (str1.length() + 1 != str2.length()) return false;
-  while (index1 < str1.length() && index2 < str2.length()) {
+  while (index1 < (int)str1.length() && index2 < (int)str2.length()) {
     if (str1[index1] != str2[index2]) {
       if (index1 != index2) {
         return false;
