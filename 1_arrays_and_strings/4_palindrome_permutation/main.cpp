@@ -34,7 +34,7 @@ bool IsPalindromePermutation(const std::string& str) {
   auto one_odd = false;
   for (const auto& c : count_vector) {
     if (c % 2 != 0) {  // Check if the character count is odd
-      if (one_odd) {   // If we already have one odd, return false
+      if (one_odd) {   // If we already have one odd, return falset
         return false;
       }
       one_odd = true;  // If we don't have one odd, set it to true
@@ -43,16 +43,23 @@ bool IsPalindromePermutation(const std::string& str) {
   return true;
 }
 
-// int main(int argc, char** argv) { // not using argc and argv for now
 /**
- * @brief Check if a string is a permutation of a palindrome
+ * @brief Main function.
  *
- * @return int 0 if successful
+ * @param argc Number of arguments passed to the program.
+ * @param argv Array of arguments passed to the program.
+ * @return int Return 0 if successful.
  */
-int main(void) {
+int main(int argc, char** argv) {
   std::unique_ptr<std::string> str = std::make_unique<std::string>();
-  // read input string from stdin
-  std::getline(std::cin, *str);
+  if (argc > 1) {  // If a string is passed as argument
+    *str = argv[1];
+  } else {  // If no arguments are passed, read from stdin
+    std::getline(std::cin, *str);
+  }
+  // convert to lowercase
+  std::transform(str->begin(), str->end(), str->begin(), ::tolower);
+
   // print result
   std::cout << IsPalindromePermutation(*str) << std::endl;
   // Note: str is automatically deleted when it goes out of scope

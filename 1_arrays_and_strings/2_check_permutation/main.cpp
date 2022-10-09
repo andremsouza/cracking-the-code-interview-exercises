@@ -7,9 +7,16 @@
 
 constexpr ushort kAsciiSize = 256;
 
-// Receives two strings (a and b), and check if b is a permutation of a
-// Solution complexity (worst case): O(n) time, O(1) space
-// Best case: O(1) time, O(1) space
+/**
+ * @brief Check if a string is a permutation of another string.
+ *
+ * @details Solution complexity (worst case): O(n) time, O(1) space
+ *  Best case: O(1) time, O(1) space
+ * @param a String to check.
+ * @param b String to check.
+ * @return true If b is a permutation of a.
+ * @return false If b is not a permutation of a.
+ */
 bool IsPermutation(const std::string &a, const std::string &b) {
   // a permutation should have the same number of characters
   if (a.length() != b.length()) return false;
@@ -27,6 +34,13 @@ bool IsPermutation(const std::string &a, const std::string &b) {
   return true;
 }
 
+/**
+ * @brief Main function.
+ *
+ * @param argc Number of arguments passed to the program.
+ * @param argv Array of arguments passed to the program.
+ * @return int Return 0 if successful.
+ */
 int main(int argc, char **argv) {
   std::string a, b;  // storing strings from input
 

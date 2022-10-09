@@ -12,7 +12,13 @@
 // #define ASCII_SIZE 256
 constexpr ushort kAsciiSize = 256;
 
-// int main() {
+/**
+ * @brief Check if a string has all unique characters.
+ *
+ * @param argc Number of arguments passed to the program.
+ * @param argv Array of arguments passed to the program.
+ * @return int Return 0 if successful.
+ */
 int main(int argc, char const *argv[]) {
   std::array<bool, kAsciiSize> charset = {
       false};                 // bit vector initialized with zeros
