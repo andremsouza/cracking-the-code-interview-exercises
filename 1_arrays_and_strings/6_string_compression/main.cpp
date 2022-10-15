@@ -24,7 +24,7 @@
  * @param str The string to be compressed.
  * @return The compressed string.
  */
-std::string compressString(const std::string &str) {
+std::string CompressString(const std::string &str) {
   if (!str.length()) return str;  // if string is empty, return it
   auto cur = str.front();         // stores current character from string
   auto cur_freq = 0;              // stores frequency of current character
