@@ -56,6 +56,6 @@ int main(int argc, char **argv) {
     std::getline(std::cin, *str);
 
   // print result
-  std::cout << compressString(*str) << std::endl;
+  std::cout << CompressString(*str) << std::endl;
   return 0;
 }
