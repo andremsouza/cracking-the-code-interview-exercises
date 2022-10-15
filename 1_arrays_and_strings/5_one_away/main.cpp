@@ -9,6 +9,7 @@
 // ple, pale
 
 #include <iostream>
+#include <memory>
 #include <string>
 
 /**
@@ -22,14 +23,12 @@
 bool IsReplaceChar(std::string str1, std::string str2) {
   auto isReplaceChar = false;
   if (str1.length() != str2.length()) return false;
-  for (int i = 0; i < (int)str1.length(); i++) {
+  for (int i = 0; i < (int)str1.length(); i++)
     if (str1[i] != str2[i]) {
-      if (isReplaceChar) {
-        return false;
-      }
+      if (isReplaceChar) return false;
       isReplaceChar = true;
     }
-  }
+
   return true;
 }
 
@@ -44,17 +43,15 @@ bool IsReplaceChar(std::string str1, std::string str2) {
 bool IsInsertChar(std::string str1, std::string str2) {
   auto index1 = 0, index2 = 0;
   if (str1.length() + 1 != str2.length()) return false;
-  while (index1 < (int)str1.length() && index2 < (int)str2.length()) {
+  while (index1 < (int)str1.length() && index2 < (int)str2.length())
     if (str1[index1] != str2[index2]) {
-      if (index1 != index2) {
-        return false;
-      }
+      if (index1 != index2) return false;
       index2++;
     } else {
       index1++;
       index2++;
     }
-  }
+
   return true;
 }
 
@@ -91,18 +88,19 @@ bool IsOneEditAway(std::string str1, std::string str2) {
  * @return int Return 0 if successful.
  */
 int main(int argc, char *argv[]) {
-  std::string str1, str2;
+  auto str1 = std::make_unique<std::string>();
+  auto str2 = std::make_unique<std::string>();
 
   if (argc > 2) {  // If a string is passed as argument
-    str1 = argv[1];
-    str2 = argv[2];
+    *str1 = argv[1];
+    *str2 = argv[2];
   } else {  // If no arguments are passed, read from stdin
-    std::getline(std::cin, str1);
-    std::getline(std::cin, str2);
+    std::getline(std::cin, *str1);
+    std::getline(std::cin, *str2);
   }
 
   // print result
-  std::cout << IsOneEditAway(str1, str2) << std::endl;
+  std::cout << IsOneEditAway(*str1, *str2) << std::endl;
 
   return 0;
 }
