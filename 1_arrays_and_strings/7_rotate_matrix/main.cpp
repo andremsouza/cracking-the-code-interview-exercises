@@ -14,7 +14,16 @@
 #include <string>
 #include <vector>
 
-// receives a square matrix. rotates in place
+/**
+ * @brief Rotates a matrix 90 degrees
+ *
+ * @details Rotates a matrix 90 degrees. The matrix is represented by a vector
+ * of vectors. The rotation is done in place.
+ *
+ * @param mat Matrix to be rotated
+ *
+ * @return void
+ */
 void RotateMatrix(std::vector<std::vector<int> > &mat) {
   auto N = mat.size();
   for (auto i = 0; i < (int)N / 2; i++) {
@@ -31,7 +40,6 @@ void RotateMatrix(std::vector<std::vector<int> > &mat) {
 
 int main(int argc, char **argv) {
   // matrix smart pointer
-
   auto mat = std::make_unique<std::vector<std::vector<int> > >();
   if (argc > 1) {  // if parameters are given, read from argv
     auto N = std::atoi(argv[1]);
